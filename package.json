@@ -24,7 +24,7 @@
   },
   "scripts": {
     "prestart": "webpack --config vendor/webpack.config.js",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server --port=3000"
   },
   "devDependencies": {
     "@types/core-js": "0.9.34",
