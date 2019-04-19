@@ -6,6 +6,7 @@ import { Passenger } from '../../models/passenger.interface';
   styleUrls: ['passenger-dashboard.component.scss'],
   template: `
     <passenger-count [items]="passengers"></passenger-count>
+    <div *ngFor="let passenger of passengers">{{ passenger.fullname }}</div>
     <passenger-detail
       *ngFor="let passenger of passengers"
       [detail]="passenger"
