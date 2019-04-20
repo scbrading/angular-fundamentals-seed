@@ -12,7 +12,20 @@ export class PassengerDashboardService {
   constructor(private http: Http) {}
 
   getPassengers = (): Observable<Passenger[]> =>
-    this.http.get(PASSENGER_API).map((response: Response) => response.json());
+    this.http
+      .get(PASSENGER_API)
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch((err: any) => Observable.throw(err));
+
+  getPassenger = (id: number): Observable<Passenger> =>
+    this.http
+      .get(`${PASSENGER_API}/${id}`)
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch((err: any) => Observable.throw(err));
 
   updatePassenger = (passenger: Passenger): Observable<Passenger> => {
     let headers = new Headers({
@@ -23,11 +36,13 @@ export class PassengerDashboardService {
     });
     return this.http
       .put(`${PASSENGER_API}/${passenger.id}`, passenger, options)
-      .map((response: Response) => response.json());
+      .map((response: Response) => response.json())
+      .catch((err: any) => Observable.throw(err));
   };
 
   removePassenger = (passenger: Passenger): Observable<Passenger> =>
     this.http
       .delete(`${PASSENGER_API}/${passenger.id}`)
-      .map((response: Response) => response.json());
+      .map((response: Response) => response.json())
+      .catch((err: any) => Observable.throw(err));
 }
